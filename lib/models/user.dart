@@ -1,17 +1,16 @@
 import 'dart:ffi';
 
 class User {
-  final Long id;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String password;
+  static final User _instance = User._internal();
+  late Long id;
+  late String firstName;
+  late String lastName;
+  late String email;
+  late String password;
 
-  User({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.password,
-  });
+  factory User() {
+    return _instance;
+  }
+
+  User._internal();
 }
