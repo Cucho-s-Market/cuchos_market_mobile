@@ -1,3 +1,5 @@
+import 'package:cuchos_market_mobile/pages/cart_page.dart';
+import 'package:cuchos_market_mobile/widgets/cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/category_grid.dart';
 import 'package:cuchos_market_mobile/widgets/products_carousel.dart';
 import 'package:cuchos_market_mobile/widgets/promos_carousel.dart';
@@ -17,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ToolBar(),
-      drawer: const SidePanel(),
+      drawer: SidePanel(),
+      floatingActionButton: const CartButton(),
       body: ListView(
         children: [
           PromosCarousel(),
@@ -36,12 +39,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Cart',
-        child: const Icon(Icons.shopping_cart),
-      ),
     );
-    ;
   }
 }

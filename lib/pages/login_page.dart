@@ -1,5 +1,6 @@
 import 'package:cuchos_market_mobile/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/tool_bar.dart';
 
@@ -19,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     debugPrint(_emailController.text);
     debugPrint(_passwordController.text);
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const HomePage(),
@@ -36,10 +37,13 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Iniciar Sesión",
-              style: TextStyle(
-                fontSize: 30,
+            Flexible(
+              fit: FlexFit.loose,
+              child: SvgPicture.asset(
+                fit: BoxFit.scaleDown,
+                height: 100,
+                'assets/images/logo.svg',
+                semanticsLabel: 'Cucho\'s Market Logo',
               ),
             ),
             Container(
