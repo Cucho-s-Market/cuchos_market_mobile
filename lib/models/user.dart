@@ -1,16 +1,22 @@
-import 'dart:ffi';
-
 class User {
-  static final User _instance = User._internal();
-  late Long id;
-  late String firstName;
-  late String lastName;
-  late String email;
-  late String password;
+  final String email;
+  final String password;
+  final String? firstName;
+  final String? lastName;
 
-  factory User() {
-    return _instance;
+  User({
+    required this.email,
+    required this.password,
+    this.firstName,
+    this.lastName,
+  });
+
+  factory User.fromJson({required Map<String, dynamic> json, required String email, required String password}) {
+    return User(
+      email: email,
+      password: password,
+      firstName: json["firstName"],
+      lastName: json["lastName"],
+    );
   }
-
-  User._internal();
 }

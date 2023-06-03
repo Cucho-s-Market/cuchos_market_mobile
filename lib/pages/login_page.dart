@@ -1,8 +1,7 @@
+import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../widgets/tool_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,17 +13,30 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String? errorMessage;
 
   void login() {
-    //TODO: Agregar logica para realizar inicio de sesion
     debugPrint(_emailController.text);
     debugPrint(_passwordController.text);
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
+    Session()
+        .login(
+      _emailController.text,
+      _passwordController.text,
+    )
+        .then(
+      (value) => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
       ),
+      onError: (error) {
+        setState(() {
+          errorMessage = error.toString();
+        });
+        debugPrint(error.toString());
+      },
     );
   }
 
@@ -52,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.grey[600],
               ),
             ),
-            TextField(
+            TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
                 label: const Text("Email"),
@@ -61,12 +73,13 @@ class _LoginPageState extends State<LoginPage> {
                   Icons.alternate_email,
                   color: Colors.grey[400],
                 ),
+                errorText: errorMessage == null ? errorMessage : '',
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            TextField(
+            TextFormField(
               controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
@@ -76,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   Icons.password_rounded,
                   color: Colors.grey[400],
                 ),
+                errorText: errorMessage,
               ),
             ),
             Container(

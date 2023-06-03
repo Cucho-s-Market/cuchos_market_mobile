@@ -1,11 +1,23 @@
 import 'dart:ffi';
 
 import 'package:cuchos_market_mobile/models/category.dart';
+import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
+import 'package:cuchos_market_mobile/pages/login_page.dart';
+import 'package:cuchos_market_mobile/widgets/drawer_session.dart';
 import 'package:flutter/material.dart';
 
-class SidePanel extends StatelessWidget {
+class SidePanel extends StatefulWidget {
+  const SidePanel({Key? key}) : super(key: key);
+
+  @override
+  State<SidePanel> createState() => _SidePanelState();
+}
+
+class _SidePanelState extends State<SidePanel> {
+  final Session session = Session();
+
   final List<Category> categories = [
     Category(
       id: const Long(),
@@ -32,9 +44,32 @@ class SidePanel extends StatelessWidget {
       name: 'Category 3',
       description: 'Category 3',
     ),
+    Category(
+      id: const Long(),
+      name: 'Category 1',
+      description: 'Category 1',
+    ),
+    Category(
+      id: const Long(),
+      name: 'Category 1',
+      description: 'Category 1',
+    ),
+    Category(
+      id: const Long(),
+      name: 'Category 1',
+      description: 'Category 1',
+    ),
+    Category(
+      id: const Long(),
+      name: 'Category 1',
+      description: 'Category 1',
+    ),
+    Category(
+      id: const Long(),
+      name: 'Category 1',
+      description: 'Category 1',
+    ),
   ];
-
-  SidePanel({Key? key}) : super(key: key);
 
   List<Widget> generateCategoryWidgets() {
     List<Widget> listTileCategories = [];
@@ -49,44 +84,60 @@ class SidePanel extends StatelessWidget {
     return listTileCategories;
   }
 
+  void logout() {
+    session.discardSesion();
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-            child: const Text('User'),
-          ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
+        child: Column(
+      children: [
+        DrawerSession(),
+        Expanded(
+          child: ListView(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.home),
+                title: const Text('Home'),
+                onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                ),
               ),
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.menu_book_sharp),
-            title: const Text('Catalogo'),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CatalogPage(),
+              ListTile(
+                leading: const Icon(Icons.menu_book_sharp),
+                title: const Text('Catalogo'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CatalogPage(),
+                  ),
+                ),
               ),
-            ),
+              ExpansionTile(
+                leading: const Icon(Icons.list),
+                title: const Text('Categorias'),
+                children: generateCategoryWidgets(),
+              ),
+            ],
           ),
-          ExpansionTile(
-            leading: const Icon(Icons.list),
-            title: const Text('Categorias'),
-            children: generateCategoryWidgets(),
-          ),
-        ],
-      ),
-    );
+        ),
+        ListTile(
+          leading: const Icon(Icons.logout),
+          title: const Text('Cerrar Sesión'),
+          onTap: logout,
+        ),
+      ],
+    ));
   }
 }

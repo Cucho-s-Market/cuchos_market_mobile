@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cuchos_market_mobile/widgets/section.dart';
 import 'package:flutter/material.dart';
 
 class PromosCarousel extends StatefulWidget {
