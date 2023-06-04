@@ -1,3 +1,5 @@
+import 'package:cuchos_market_mobile/models/categories.dart';
+import 'package:cuchos_market_mobile/models/category.dart';
 import 'package:cuchos_market_mobile/widgets/section.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,27 @@ class CategoryGrid extends StatefulWidget {
 }
 
 class _CategoryGridState extends State<CategoryGrid> {
+  List<Widget> generateCategoryCards() {
+    List<Category> categories = Categories().categories.values.toList();
+    List<Widget> categoryCards = [];
+
+    for (Category category in categories) {
+      categoryCards.add(
+        Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(category.name),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return categoryCards;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Section(
@@ -22,20 +45,7 @@ class _CategoryGridState extends State<CategoryGrid> {
           crossAxisCount: 2,
         ),
         primary: false,
-        children: const [
-          Card(
-            child: Text("Ropa"),
-          ),
-          Card(
-            child: Text("Tecnologia"),
-          ),
-          Card(
-            child: Text("Alimentos"),
-          ),
-          Card(
-            child: Text("Muebles"),
-          ),
-        ],
+        children: generateCategoryCards(),
       ),
     );
   }

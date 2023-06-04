@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ToolBar(),
-      drawer: SidePanel(),
+      drawer: const SidePanel(),
       floatingActionButton: const CartButton(),
       body: ListView(
         children: [
