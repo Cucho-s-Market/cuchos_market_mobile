@@ -21,8 +21,10 @@ class Session {
     if (email.isEmpty) throw CredentialsException('El email no puede estar vacio.');
     if (password.isEmpty) throw CredentialsException('La contraseña no puede estar vacia.');
 
+    final Uri url = Uri.parse("http://localhost:8080/users/auth/login");
+
     final response = await http.post(
-      Uri.parse("http://localhost:8080/users/auth/login"),
+      url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -38,7 +40,7 @@ class Session {
       case 200:
         Map<String, dynamic> body = jsonDecode(response.body);
 
-        if (body["error"] == true) throw CredentialsException("Credenciales invalidas.");
+        if (body["error"] == true) throw CredentialsException(body["message"]);
 
         token = body["token"];
         debugPrint(token.toString());

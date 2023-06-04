@@ -5,7 +5,7 @@ import 'package:cuchos_market_mobile/models/order_status.dart';
 import 'package:cuchos_market_mobile/models/order_type.dart';
 
 class Order {
-  final Long id;
+  final int id;
   final Float totalPrice;
   final DateTime creationDate;
   final DateTime endDate;

@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 class Adress {
-  final Long id;
+  final int id;
   final String address;
   final int doorNumber;
   final String location;

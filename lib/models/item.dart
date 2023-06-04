@@ -7,7 +7,7 @@ class Item {
   final String name;
   final Float price;
   final Float finalPrice;
-  final Int quantity;
+  final int quantity;
   final Product product;
 
   Item({

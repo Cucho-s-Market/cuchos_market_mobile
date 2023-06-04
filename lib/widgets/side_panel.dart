@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:cuchos_market_mobile/models/categories.dart';
 import 'package:cuchos_market_mobile/models/category.dart';
 import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
@@ -17,71 +16,70 @@ class SidePanel extends StatefulWidget {
 
 class _SidePanelState extends State<SidePanel> {
   final Session session = Session();
+  final List<Widget> categoryWidgets = [];
 
-  final List<Category> categories = [
-    Category(
-      id: const Long(),
-      name: 'Category 1',
-      description: 'Category 1',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 2',
-      description: 'Category 2',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 3',
-      description: 'Category 3',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 3',
-      description: 'Category 3',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 3',
-      description: 'Category 3',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 1',
-      description: 'Category 1',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 1',
-      description: 'Category 1',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 1',
-      description: 'Category 1',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 1',
-      description: 'Category 1',
-    ),
-    Category(
-      id: const Long(),
-      name: 'Category 1',
-      description: 'Category 1',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
 
-  List<Widget> generateCategoryWidgets() {
-    List<Widget> listTileCategories = [];
+    Categories()
+        .loadCategories()
+        .then(
+          (value) => setState(generateCategoryWidgets),
+        )
+        .onError(
+      (error, stackTrace) {
+        debugPrint(error.toString());
+      },
+    );
+  }
+
+  void generateCategoryWidgets() {
+    List<Category> categories = Categories().categories.values.toList();
+
     for (Category category in categories) {
-      listTileCategories.add(
+      if (category.subcategories.isEmpty) {
+        categoryWidgets.add(
+          ListTile(
+            title: Text(category.name),
+            onTap: () {},
+          ),
+        );
+      } else {
+        categoryWidgets.add(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Text(
+                  category.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ...generateSubCategoryWidgets(category.subcategories),
+            ],
+          ),
+        );
+      }
+    }
+  }
+
+  List<Widget> generateSubCategoryWidgets(List<Category> subcategories) {
+    List<Widget> subCategoryWidgets = [];
+
+    for (Category subCategory in subcategories) {
+      subCategoryWidgets.add(
         ListTile(
-          title: Text(category.name),
+          title: Text(' \u2981\t\t  ${subCategory.name}'),
+          onTap: () {},
         ),
       );
     }
 
-    return listTileCategories;
+    return subCategoryWidgets;
   }
 
   void logout() {
@@ -115,7 +113,7 @@ class _SidePanelState extends State<SidePanel> {
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.menu_book_sharp),
+                leading: const Icon(Icons.grid_view),
                 title: const Text('Catalogo'),
                 onTap: () => Navigator.push(
                   context,
@@ -127,7 +125,7 @@ class _SidePanelState extends State<SidePanel> {
               ExpansionTile(
                 leading: const Icon(Icons.list),
                 title: const Text('Categorias'),
-                children: generateCategoryWidgets(),
+                children: categoryWidgets,
               ),
             ],
           ),
