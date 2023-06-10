@@ -1,4 +1,4 @@
-import 'package:cuchos_market_mobile/pages/cart_page.dart';
+import 'package:cuchos_market_mobile/models/categories.dart';
 import 'package:cuchos_market_mobile/widgets/cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/category_grid.dart';
 import 'package:cuchos_market_mobile/widgets/products_carousel.dart';
@@ -15,6 +15,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() {
+    Categories().loadCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

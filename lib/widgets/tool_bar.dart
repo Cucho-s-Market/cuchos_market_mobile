@@ -1,4 +1,5 @@
 import 'package:cuchos_market_mobile/pages/search_page.dart';
+import 'package:cuchos_market_mobile/widgets/branch_selector.dart';
 import 'package:flutter/material.dart';
 
 class ToolBar extends StatefulWidget implements PreferredSizeWidget {
@@ -26,7 +27,7 @@ class _ToolBarState extends State<ToolBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(widget.title),
+      title: const BranchSelector(),
       actions: [
         IconButton(
           onPressed: search,

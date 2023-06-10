@@ -1,13 +1,11 @@
-import 'dart:ffi';
-
-class Adress {
+class Address {
   final int id;
   final String address;
   final int doorNumber;
   final String location;
   final String state;
 
-  Adress({
+  Address({
     required this.id,
     required this.address,
     required this.doorNumber,

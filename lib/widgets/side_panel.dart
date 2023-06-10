@@ -4,6 +4,7 @@ import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
 import 'package:cuchos_market_mobile/pages/login_page.dart';
+import 'package:cuchos_market_mobile/widgets/categories_tiles.dart';
 import 'package:cuchos_market_mobile/widgets/drawer_session.dart';
 import 'package:flutter/material.dart';
 
@@ -16,71 +17,6 @@ class SidePanel extends StatefulWidget {
 
 class _SidePanelState extends State<SidePanel> {
   final Session session = Session();
-  final List<Widget> categoryWidgets = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    Categories()
-        .loadCategories()
-        .then(
-          (value) => setState(generateCategoryWidgets),
-        )
-        .onError(
-      (error, stackTrace) {
-        debugPrint(error.toString());
-      },
-    );
-  }
-
-  void generateCategoryWidgets() {
-    List<Category> categories = Categories().categories.values.toList();
-
-    for (Category category in categories) {
-      if (category.subcategories.isEmpty) {
-        categoryWidgets.add(
-          ListTile(
-            title: Text(category.name),
-            onTap: () {},
-          ),
-        );
-      } else {
-        categoryWidgets.add(
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: Text(
-                  category.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ...generateSubCategoryWidgets(category.subcategories),
-            ],
-          ),
-        );
-      }
-    }
-  }
-
-  List<Widget> generateSubCategoryWidgets(List<Category> subcategories) {
-    List<Widget> subCategoryWidgets = [];
-
-    for (Category subCategory in subcategories) {
-      subCategoryWidgets.add(
-        ListTile(
-          title: Text(' \u2981\t\t  ${subCategory.name}'),
-          onTap: () {},
-        ),
-      );
-    }
-
-    return subCategoryWidgets;
-  }
 
   void logout() {
     session.discardSesion();
@@ -122,11 +58,7 @@ class _SidePanelState extends State<SidePanel> {
                   ),
                 ),
               ),
-              ExpansionTile(
-                leading: const Icon(Icons.list),
-                title: const Text('Categorias'),
-                children: categoryWidgets,
-              ),
+              CategoriesTiles(),
             ],
           ),
         ),
