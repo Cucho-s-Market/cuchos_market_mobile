@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:cuchos_market_mobile/exceptions/branches_exception.dart';
 import 'package:cuchos_market_mobile/models/branch.dart';
 import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
 class Branches {
   static final Branches _instance = Branches._internal();
-  final Map<int, Branch> branches = {};
+  final ValueNotifier<Map<int, Branch>> branches = ValueNotifier<Map<int, Branch>>({});
+  final ValueNotifier<Branch> selectedBranch = ValueNotifier(Branch.empty());
 
   factory Branches() {
     return _instance;
@@ -17,6 +19,8 @@ class Branches {
   Branches._internal();
 
   Future<void> loadBranches() async {
+    final Map<int, Branch> newBranches = {};
+
     final Uri url = Uri.parse("http://localhost:8080/branches");
     final Map<String, String> headers = {
       'Authorization': 'Bearer ${Session().token}',
@@ -33,12 +37,10 @@ class Branches {
 
         if (body["error"] == true) throw BranchesException(body["message"]);
 
-        if (body["data"].isEmpty()) throw BranchesException("No se obtuvieron sucursales.");
-
-        branches.clear();
+        if (body["data"].isEmpty) throw BranchesException("No se obtuvieron sucursales.");
 
         for (final Map<String, dynamic> branchJson in body["data"]) {
-          branches[branchJson['id']] = Branch.fromJson(branchJson);
+          newBranches[branchJson['id']] = Branch.fromJson(branchJson);
         }
 
         break;
@@ -46,5 +48,8 @@ class Branches {
         throw BranchesException("Forbidden: Error al obtener sucursales.");
       default:
     }
+
+    branches.value = newBranches;
+    selectedBranch.value = branches.value.values.first;
   }
 }

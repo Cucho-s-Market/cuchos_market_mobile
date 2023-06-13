@@ -2,7 +2,7 @@ import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:flutter/material.dart';
 
 class DrawerSession extends StatefulWidget {
-  DrawerSession({Key? key}) : super(key: key);
+  const DrawerSession({Key? key}) : super(key: key);
 
   @override
   State<DrawerSession> createState() => _DrewerSessionState();

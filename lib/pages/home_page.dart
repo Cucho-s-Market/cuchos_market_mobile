@@ -1,3 +1,4 @@
+import 'package:cuchos_market_mobile/models/branches.dart';
 import 'package:cuchos_market_mobile/models/categories.dart';
 import 'package:cuchos_market_mobile/widgets/cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/category_grid.dart';
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   void loadData() {
     Categories().loadCategories();
+    Branches().loadBranches();
   }
 
   @override

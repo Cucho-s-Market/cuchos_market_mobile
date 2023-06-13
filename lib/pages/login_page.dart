@@ -1,5 +1,6 @@
 import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
+import 'package:cuchos_market_mobile/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -49,15 +50,7 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Flexible(
-              fit: FlexFit.loose,
-              child: SvgPicture.asset(
-                fit: BoxFit.scaleDown,
-                height: 100,
-                'assets/images/logo.svg',
-                semanticsLabel: 'Cucho\'s Market Logo',
-              ),
-            ),
+            const Logo(height: 100),
             Container(
               margin: const EdgeInsets.all(20),
               child: Divider(

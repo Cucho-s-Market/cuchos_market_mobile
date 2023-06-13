@@ -1,10 +1,12 @@
 import 'package:cuchos_market_mobile/models/order.dart';
 
 class Branch {
-  final int id;
-  final String name;
-  final String address;
+  int? id;
+  String? name;
+  String? address;
   final List<Order> orders = [];
+
+  Branch.empty();
 
   Branch({
     required this.id,
