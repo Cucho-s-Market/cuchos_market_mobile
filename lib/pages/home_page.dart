@@ -1,5 +1,6 @@
-import 'package:cuchos_market_mobile/models/branches.dart';
-import 'package:cuchos_market_mobile/models/categories.dart';
+import 'package:cuchos_market_mobile/utilities/branch_controller.dart';
+import 'package:cuchos_market_mobile/utilities/category_controller.dart';
+import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:cuchos_market_mobile/widgets/cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/category_grid.dart';
 import 'package:cuchos_market_mobile/widgets/products_carousel.dart';
@@ -22,9 +23,10 @@ class _HomePageState extends State<HomePage> {
     loadData();
   }
 
-  void loadData() {
-    Categories().loadCategories();
-    Branches().loadBranches();
+  void loadData() async {
+    await BranchController().loadBranches();
+    await CategoryController().loadCategories();
+    await ProductController().loadProducts();
   }
 
   @override

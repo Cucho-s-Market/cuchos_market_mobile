@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cuchos_market_mobile/models/product.dart';
+import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:cuchos_market_mobile/widgets/product_widget.dart';
 import 'package:cuchos_market_mobile/widgets/section.dart';
 import 'package:flutter/material.dart';
@@ -18,168 +19,7 @@ class _ProductsCarouselState extends State<ProductsCarousel> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
   //TODO: Implementar logica para obtener productos
-  List<Product> products = [
-    Product(
-      name: 'test1',
-      description: 'test1',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test1',
-      images: [],
-    ),
-    Product(
-      name: 'test2',
-      description: 'test2',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test2',
-      images: [],
-    ),
-    Product(
-      name: 'test3',
-      description: 'test3',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test3',
-      images: [],
-    ),
-    Product(
-      name: 'test4',
-      description: 'test4',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test4',
-      images: [],
-    ),
-    Product(
-      name: 'test1',
-      description: 'test1',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test1',
-      images: [],
-    ),
-    Product(
-      name: 'test2',
-      description: 'test2',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test2',
-      images: [],
-    ),
-    Product(
-      name: 'test3',
-      description: 'test3',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test3',
-      images: [],
-    ),
-    Product(
-      name: 'test4',
-      description: 'test4',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test4',
-      images: [],
-    ),
-    Product(
-      name: 'test1',
-      description: 'test1',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test1',
-      images: [],
-    ),
-    Product(
-      name: 'test2',
-      description: 'test2',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test2',
-      images: [],
-    ),
-    Product(
-      name: 'test3',
-      description: 'test3',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test3',
-      images: [],
-    ),
-    Product(
-      name: 'test4',
-      description: 'test4',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test4',
-      images: [],
-    ),
-    Product(
-      name: 'test1',
-      description: 'test1',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test1',
-      images: [],
-    ),
-    Product(
-      name: 'test2',
-      description: 'test2',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test2',
-      images: [],
-    ),
-    Product(
-      name: 'test3',
-      description: 'test3',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test3',
-      images: [],
-    ),
-    Product(
-      name: 'test4',
-      description: 'test4',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test4',
-      images: [],
-    ),
-    Product(
-      name: 'test1',
-      description: 'test1',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test1',
-      images: [],
-    ),
-    Product(
-      name: 'test2',
-      description: 'test2',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test2',
-      images: [],
-    ),
-    Product(
-      name: 'test3',
-      description: 'test3',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test3',
-      images: [],
-    ),
-    Product(
-      name: 'test4',
-      description: 'test4',
-      entryDate: DateTime.now(),
-      price: const Float(),
-      brand: 'test4',
-      images: [],
-    ),
-  ];
+  List<Product> products = ProductController().products.value.values.toList();
 
   @override
   Widget build(BuildContext context) {
@@ -187,6 +27,7 @@ class _ProductsCarouselState extends State<ProductsCarousel> {
       title: widget.title,
       child: Column(
         children: [
+          //TODO: Refactorizar para utilizar ValueListenable
           CarouselSlider(
             carouselController: _controller,
             items: products.map(

@@ -1,4 +1,4 @@
-import 'package:cuchos_market_mobile/models/categories.dart';
+import 'package:cuchos_market_mobile/utilities/category_controller.dart';
 import 'package:cuchos_market_mobile/widgets/category_card.dart';
 import 'package:cuchos_market_mobile/widgets/section.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _CategoryGridState extends State<CategoryGrid> {
         style: TextStyle(fontSize: 20),
       ),
       child: ValueListenableBuilder(
-        valueListenable: Categories().categories,
+        valueListenable: CategoryController().categories,
         builder: (context, categories, child) => GridView.builder(
           shrinkWrap: true,
           primary: false,

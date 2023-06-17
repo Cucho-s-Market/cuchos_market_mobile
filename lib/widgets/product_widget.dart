@@ -1,5 +1,6 @@
 import 'package:cuchos_market_mobile/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProductWidget extends StatefulWidget {
   final Product product;
@@ -16,13 +17,31 @@ class _ProductWidgetState extends State<ProductWidget> {
     Product product = widget.product;
 
     return Card(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          product.images.isNotEmpty ? product.images.first : const Text('NO DATA', style: TextStyle(color: Colors.red)),
-          Card(
-            child: Text(widget.product.name),
+          product.images.isNotEmpty
+              ? Opacity(
+                  opacity: 0.7,
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: product.images.first!,
+                    imageErrorBuilder: (context, error, stackTrace) => const Center(
+                      child: Text(
+                        'NO DATA',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                )
+              : const Text('NO DATA', style: TextStyle(color: Colors.red)),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: Card(
+              child: Text(
+                widget.product.name,
+              ),
+            ),
           ),
         ],
       ),

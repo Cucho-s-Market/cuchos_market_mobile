@@ -1,4 +1,4 @@
-import 'package:cuchos_market_mobile/models/categories.dart';
+import 'package:cuchos_market_mobile/utilities/category_controller.dart';
 import 'package:cuchos_market_mobile/widgets/subcategory_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class _CategoriesTilesState extends State<CategoriesTiles> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: Categories().categories,
+      valueListenable: CategoryController().categories,
       builder: (context, categories, child) => ExpansionTile(
         leading: const Icon(Icons.list),
         title: const Text('Categorias'),

@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-import 'package:cuchos_market_mobile/exceptions/categories_exception.dart';
+import 'package:cuchos_market_mobile/exceptions/category_exception.dart';
 import 'package:cuchos_market_mobile/models/category.dart';
 import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
-class Categories {
-  static final Categories _instance = Categories._internal();
+class CategoryController {
+  static final CategoryController _instance = CategoryController._internal();
   final ValueNotifier<Map<int, Category>> categories = ValueNotifier<Map<int, Category>>({});
 
-  factory Categories() {
+  factory CategoryController() {
     return _instance;
   }
 
-  Categories._internal();
+  CategoryController._internal();
 
   Future<void> loadCategories() async {
     final Map<int, Category> newCategories = {};
@@ -34,7 +34,7 @@ class Categories {
       case 200:
         Map<String, dynamic> body = jsonDecode(response.body);
 
-        if (body["error"] == true) throw CategoriesException(body["message"]);
+        if (body["error"] == true) throw CategoryException(body["message"]);
 
         for (final Map<String, dynamic> categoryJson in body["data"]) {
           Category category = Category.fromJson(
@@ -51,9 +51,9 @@ class Categories {
         }
         break;
       case 403:
-        throw CategoriesException("Forbidden: Error al obtener categorias.");
+        throw CategoryException("Forbidden: Error al obtener categorias.");
       default:
-        throw CategoriesException("Respuesta ${response.statusCode} indeterminada.");
+        throw CategoryException("Respuesta ${response.statusCode} indeterminada.");
     }
 
     categories.value = newCategories;

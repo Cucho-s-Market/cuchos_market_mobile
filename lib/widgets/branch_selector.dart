@@ -1,4 +1,5 @@
-import 'package:cuchos_market_mobile/models/branches.dart';
+import 'package:cuchos_market_mobile/utilities/branch_controller.dart';
+import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:flutter/material.dart';
 
 class BranchSelector extends StatefulWidget {
@@ -9,36 +10,42 @@ class BranchSelector extends StatefulWidget {
 }
 
 class _BranchSelectorState extends State<BranchSelector> {
-  int selectedItem = Branches().selectedBranch.value.id ?? 1;
+  int selectedItem = BranchController().selectedBranch.value.id ?? 1;
 
   void selectBranch(int branchId) {
     selectedItem = branchId;
-    Branches().selectedBranch.value = Branches().branches.value[selectedItem]!;
+    BranchController().selectedBranch.value = BranchController().branches.value[selectedItem]!;
+
+    //TODO: Consultar si el producto se obtiene cuando el stock es 0
+    ProductController().loadProducts();
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: Branches().branches,
-      builder: (context, branches, child) => Container(
-        margin: const EdgeInsets.all(10),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-            isExpanded: true,
-            icon: const Icon(Icons.location_on),
-            focusColor: Colors.transparent,
-            value: selectedItem,
-            items: branches.values
-                .map(
-                  (branch) => DropdownMenuItem(
-                    value: branch.id,
+      valueListenable: BranchController().branches,
+      builder: (context, branches, child) => DropdownButtonHideUnderline(
+        child: DropdownButton(
+          isExpanded: true,
+          icon: Container(
+            margin: const EdgeInsets.all(10),
+            child: const Icon(Icons.location_on),
+          ),
+          focusColor: Colors.transparent,
+          value: selectedItem,
+          items: branches.values
+              .map(
+                (branch) => DropdownMenuItem(
+                  value: branch.id,
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
                     child: Text(branch.name!),
                   ),
-                )
-                .toList(),
-            onChanged: (branch) => selectBranch(branch!),
-          ),
+                ),
+              )
+              .toList(),
+          onChanged: (branch) => selectBranch(branch!),
         ),
       ),
     );

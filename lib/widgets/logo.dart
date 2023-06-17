@@ -8,14 +8,11 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      fit: FlexFit.loose,
-      child: SvgPicture.asset(
-        fit: BoxFit.scaleDown,
-        height: height,
-        'assets/images/logo.svg',
-        semanticsLabel: 'Cucho\'s Market Logo',
-      ),
+    return SvgPicture.asset(
+      fit: BoxFit.scaleDown,
+      height: height,
+      'assets/images/logo.svg',
+      semanticsLabel: 'Cucho\'s Market Logo',
     );
   }
 }

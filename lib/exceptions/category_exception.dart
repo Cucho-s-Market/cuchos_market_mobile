@@ -1,7 +1,7 @@
-class CategoriesException implements Exception {
+class CategoryException implements Exception {
   final String message;
 
-  CategoriesException(this.message);
+  CategoryException(this.message);
 
   @override
   String toString() {

@@ -1,7 +1,7 @@
-class BranchesException implements Exception {
+class ProductException implements Exception {
   final String message;
 
-  BranchesException(this.message);
+  ProductException(this.message);
 
   @override
   String toString() {
