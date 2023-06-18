@@ -26,7 +26,7 @@ class Product {
       entryDate: DateTime.parse(json["entryDate"]),
       price: json["price"],
       brand: json["brand"],
-      images: json["images"],
+      images: json["images"], //TODO: Controlar caso imagenes null
     );
   }
 }

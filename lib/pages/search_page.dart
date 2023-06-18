@@ -15,7 +15,6 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   final List<Product> filteredProducts = [];
 
-  //TODO: Implementar logica para obtener productos
   List<Product> products = ProductController().products.value.values.toList();
 
   void search(String query) {
@@ -24,7 +23,9 @@ class _SearchPageState extends State<SearchPage> {
         filteredProducts.clear();
         if (query.isNotEmpty) {
           for (Product product in products) {
-            if (product.name.contains(query) | product.brand.contains(query) | product.description.contains(query)) filteredProducts.add(product);
+            if (product.name.toLowerCase().contains(query.toLowerCase()) |
+                product.brand.toLowerCase().contains(query.toLowerCase()) |
+                product.description.toLowerCase().contains(query.toLowerCase())) filteredProducts.add(product);
           }
         }
       },

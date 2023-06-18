@@ -18,13 +18,14 @@ class _ProductWidgetState extends State<ProductWidget> {
 
     return Card(
       child: Stack(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.center,
         children: [
           product.images.isNotEmpty
               ? Opacity(
                   opacity: 0.7,
                   child: FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
+                    fit: BoxFit.fill,
                     image: product.images.first!,
                     imageErrorBuilder: (context, error, stackTrace) => const Center(
                       child: Text(
@@ -36,10 +37,21 @@ class _ProductWidgetState extends State<ProductWidget> {
                 )
               : const Text('NO DATA', style: TextStyle(color: Colors.red)),
           Container(
+            alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.all(10),
-            child: Card(
-              child: Text(
-                widget.product.name,
+            child: Opacity(
+              opacity: 0.8,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.black,
+                ),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  widget.product.name,
+                ),
               ),
             ),
           ),
