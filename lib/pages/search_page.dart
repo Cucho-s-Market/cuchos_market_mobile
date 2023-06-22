@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:cuchos_market_mobile/models/product.dart';
+import 'package:cuchos_market_mobile/pages/product_page.dart';
 import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -58,6 +59,14 @@ class _SearchPageState extends State<SearchPage> {
               child: ListView.builder(
                 itemCount: filteredProducts.length,
                 itemBuilder: (context, index) => ListTile(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductPage(
+                        product: filteredProducts.elementAt(index),
+                      ),
+                    ),
+                  ),
                   title: Text(
                     filteredProducts[index].name,
                     style: const TextStyle(fontWeight: FontWeight.normal),

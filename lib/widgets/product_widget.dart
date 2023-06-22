@@ -1,4 +1,6 @@
 import 'package:cuchos_market_mobile/models/product.dart';
+import 'package:cuchos_market_mobile/pages/product_page.dart';
+import 'package:cuchos_market_mobile/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -16,46 +18,43 @@ class _ProductWidgetState extends State<ProductWidget> {
   Widget build(BuildContext context) {
     Product product = widget.product;
 
-    return Card(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          product.images.isNotEmpty
-              ? Opacity(
-                  opacity: 0.7,
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    fit: BoxFit.fill,
-                    image: product.images.first!,
-                    imageErrorBuilder: (context, error, stackTrace) => const Center(
-                      child: Text(
-                        'NO DATA',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProductPage(product: product),
+        ),
+      ),
+      child: Card(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            product.images.isNotEmpty
+                ? ImageLoader(
+                    imageUrl: product.images.first!,
+                  )
+                : const Text('NO DATA', style: TextStyle(color: Colors.red)),
+            Container(
+              alignment: Alignment.bottomCenter,
+              margin: const EdgeInsets.all(10),
+              child: Opacity(
+                opacity: 0.8,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.black,
                   ),
-                )
-              : const Text('NO DATA', style: TextStyle(color: Colors.red)),
-          Container(
-            alignment: Alignment.bottomCenter,
-            margin: const EdgeInsets.all(10),
-            child: Opacity(
-              opacity: 0.8,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: Colors.black,
-                ),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  widget.product.name,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    widget.product.name,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

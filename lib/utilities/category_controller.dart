@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cuchos_market_mobile/exceptions/category_exception.dart';
 import 'package:cuchos_market_mobile/models/category.dart';
+import 'package:cuchos_market_mobile/models/product.dart';
 import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,8 @@ class CategoryController {
         if (body["error"] == true) throw CategoryException(body["message"]);
 
         for (final Map<String, dynamic> categoryJson in body["data"]) {
+          //TODO: Agregar consulta para obtener productos directamente por Categoria
+
           Category category = Category.fromJson(
             json: categoryJson,
           );
@@ -57,5 +60,11 @@ class CategoryController {
     }
 
     categories.value = newCategories;
+  }
+
+  void addProductToCategory({required int categoryId, required Product product}) {
+    Category category = categories.value.values.firstWhere((category) => category.subcategories.containsKey(categoryId));
+
+    category.subcategories[categoryId]?.products[product.name] = product;
   }
 }

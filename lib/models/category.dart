@@ -6,8 +6,8 @@ class Category {
   final String description;
   final int? parent;
   final String? image;
-  final List<Category> subcategories = [];
-  final Map<String, Product>? products = {};
+  final Map<int, Category> subcategories = {};
+  final Map<String, Product> products = {};
 
   Category({
     required this.id,
@@ -28,6 +28,6 @@ class Category {
   }
 
   void addSubcategory(Category subCategory) {
-    subcategories.add(subCategory);
+    subcategories[subCategory.id] = subCategory;
   }
 }

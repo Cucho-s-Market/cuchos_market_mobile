@@ -2,6 +2,7 @@ import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
 import 'package:cuchos_market_mobile/pages/login_page.dart';
+import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:cuchos_market_mobile/widgets/branch_selector.dart';
 import 'package:cuchos_market_mobile/widgets/categories_tiles.dart';
 import 'package:cuchos_market_mobile/widgets/drawer_session.dart';
@@ -38,43 +39,46 @@ class _SidePanelState extends State<SidePanel> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Column(
-      children: [
-        const DrawerSession(),
-        Expanded(
-          child: ListView(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Home'),
-                onTap: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
+      child: Column(
+        children: [
+          const DrawerSession(),
+          Expanded(
+            child: ListView(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.home),
+                  title: const Text('Home'),
+                  onTap: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.grid_view),
-                title: const Text('Catalogo'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CatalogPage(),
+                ListTile(
+                  leading: const Icon(Icons.grid_view),
+                  title: const Text('Catalogo'),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CatalogPage(
+                        products: ProductController().products.value.values.toList(),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              CategoriesTiles(),
-            ],
+                CategoriesTiles(),
+              ],
+            ),
           ),
-        ),
-        const BranchSelector(),
-        ListTile(
-          leading: const Icon(Icons.logout),
-          title: const Text('Cerrar Sesión'),
-          onTap: logout,
-        ),
-      ],
-    ));
+          const BranchSelector(),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Cerrar Sesión'),
+            onTap: logout,
+          ),
+        ],
+      ),
+    );
   }
 }

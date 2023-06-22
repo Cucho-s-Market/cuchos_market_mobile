@@ -39,7 +39,7 @@ class _CategoriesTilesState extends State<CategoriesTiles> {
                     ...List.generate(
                       categories.values.elementAt(x).subcategories.length,
                       (y) => SubCategoryTile(
-                        subcategory: categories.values.elementAt(x).subcategories.elementAt(y),
+                        subcategory: categories.values.elementAt(x).subcategories.values.elementAt(y),
                       ),
                     ),
                   ],

@@ -1,13 +1,10 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-
 class Product {
   final String name;
   final String description;
   final DateTime entryDate;
   final double price;
   final String brand;
+  final int categoryId;
   final List<dynamic> images;
 
   Product({
@@ -16,6 +13,7 @@ class Product {
     required this.entryDate,
     required this.price,
     required this.brand,
+    required this.categoryId,
     required this.images,
   });
 
@@ -26,7 +24,8 @@ class Product {
       entryDate: DateTime.parse(json["entryDate"]),
       price: json["price"],
       brand: json["brand"],
-      images: json["images"], //TODO: Controlar caso imagenes null
+      categoryId: json["categoryId"],
+      images: json.containsKey("images") ? json["images"] : [],
     );
   }
 }

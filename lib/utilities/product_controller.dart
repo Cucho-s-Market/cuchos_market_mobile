@@ -4,6 +4,7 @@ import 'package:cuchos_market_mobile/exceptions/product_exception.dart';
 import 'package:cuchos_market_mobile/models/product.dart';
 import 'package:cuchos_market_mobile/models/session.dart';
 import 'package:cuchos_market_mobile/utilities/branch_controller.dart';
+import 'package:cuchos_market_mobile/utilities/category_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -12,6 +13,7 @@ class ProductController {
   static final ProductController _instance = ProductController._internal();
   final ValueNotifier<Map<String, Product>> products = ValueNotifier<Map<String, Product>>({});
   final BranchController branchController = BranchController();
+  final CategoryController categoryController = CategoryController();
 
   factory ProductController() {
     return _instance;
@@ -53,6 +55,7 @@ class ProductController {
           Product product = Product.fromJson(json: productJson);
 
           newProducts[product.name] = product;
+          categoryController.addProductToCategory(categoryId: product.categoryId, product: product);
         }
 
         break;
