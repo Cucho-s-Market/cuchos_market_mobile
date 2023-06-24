@@ -4,7 +4,6 @@ import 'package:cuchos_market_mobile/widgets/add_to_cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/image_loader.dart';
 import 'package:cuchos_market_mobile/widgets/product_description.dart';
 import 'package:cuchos_market_mobile/widgets/product_information.dart';
-import 'package:cuchos_market_mobile/widgets/product_price.dart';
 import 'package:cuchos_market_mobile/widgets/products_carousel.dart';
 import 'package:cuchos_market_mobile/widgets/tool_bar.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class _ProductPageState extends State<ProductPage> {
             child: ListView(
               children: [
                 ProductInformation(product: widget.product),
-                AddToCartButton(),
+                AddToCartButton(product: widget.product),
                 ProductDescription(
                   product: widget.product,
                 ),

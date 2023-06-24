@@ -17,7 +17,6 @@ class ProductsCarousel extends StatefulWidget {
 class _ProductsCarouselState extends State<ProductsCarousel> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
-  //TODO: Implementar logica para obtener productos
 
   @override
   Widget build(BuildContext context) {

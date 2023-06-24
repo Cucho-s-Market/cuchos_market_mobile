@@ -1,7 +1,12 @@
+import 'package:cuchos_market_mobile/models/cart.dart';
+import 'package:cuchos_market_mobile/models/product.dart';
+import 'package:cuchos_market_mobile/widgets/quantity_card.dart';
 import 'package:flutter/material.dart';
 
 class AddToCartButton extends StatefulWidget {
-  const AddToCartButton({Key? key}) : super(key: key);
+  final Product product;
+
+  const AddToCartButton({Key? key, required this.product}) : super(key: key);
 
   @override
   State<AddToCartButton> createState() => _AddToCartButtonsState();
@@ -9,20 +14,20 @@ class AddToCartButton extends StatefulWidget {
 
 class _AddToCartButtonsState extends State<AddToCartButton> {
   bool isPressed = false;
-  int quantity = 0;
+  late int quantity;
 
-  void showQuantityButton(bool state) {
-    setState(() => isPressed = state);
+  @override
+  void initState() {
+    super.initState();
+    quantity = cartContent.value[widget.product] ?? 1;
   }
 
-  void changeQuantity(bool operation) {
-    setState(() {
-      if (operation) {
-        quantity += 1;
-      } else if (quantity > 0) {
-        quantity -= 1;
-      }
-    });
+  void _setQuantity(int newQuantity) => quantity = newQuantity;
+
+  void _showQuantityButton(bool state) {
+    if (!state) cartContent.value[widget.product] = quantity;
+
+    setState(() => isPressed = state);
   }
 
   @override
@@ -34,34 +39,15 @@ class _AddToCartButtonsState extends State<AddToCartButton> {
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
               ),
-              onPressed: () => showQuantityButton(true),
+              onPressed: () => _showQuantityButton(true),
               child: const Text("Agregar al Carrito"),
             ),
           )
         : Column(
             children: [
-              Card(
-                margin: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => changeQuantity(false),
-                      icon: const Icon(Icons.remove),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          quantity.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => changeQuantity(true),
-                      icon: const Icon(Icons.add),
-                    ),
-                  ],
-                ),
+              QuantityCard(
+                setQuantity: _setQuantity,
+                currentQuantity: quantity,
               ),
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
@@ -69,7 +55,7 @@ class _AddToCartButtonsState extends State<AddToCartButton> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(40),
                   ),
-                  onPressed: () => showQuantityButton(false),
+                  onPressed: () => _showQuantityButton(false),
                   child: const Text("Confirmar"),
                 ),
               )
