@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cuchos_market_mobile/exceptions/product_exception.dart';
 import 'package:cuchos_market_mobile/models/product.dart';
-import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:cuchos_market_mobile/utilities/branch_controller.dart';
 import 'package:cuchos_market_mobile/utilities/category_controller.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class ProductController {
     );
 
     final Map<String, String> headers = {
-      'Authorization': 'Bearer ${Session().token}',
+      'Authorization': 'Bearer ${SessionController().token}',
     };
 
     final response = await http.get(

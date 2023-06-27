@@ -2,7 +2,6 @@ import 'package:cuchos_market_mobile/models/product.dart';
 import 'package:cuchos_market_mobile/pages/product_page.dart';
 import 'package:cuchos_market_mobile/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class ProductWidget extends StatefulWidget {
   final Product product;

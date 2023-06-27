@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cuchos_market_mobile/exceptions/branch_exception.dart';
 import 'package:cuchos_market_mobile/models/branch.dart';
-import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -23,7 +23,7 @@ class BranchController {
 
     final Uri url = Uri.parse("http://localhost:8080/branches");
     final Map<String, String> headers = {
-      'Authorization': 'Bearer ${Session().token}',
+      'Authorization': 'Bearer ${SessionController().token}',
     };
 
     final response = await http.get(

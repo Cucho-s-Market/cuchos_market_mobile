@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cuchos_market_mobile/exceptions/category_exception.dart';
 import 'package:cuchos_market_mobile/models/category.dart';
 import 'package:cuchos_market_mobile/models/product.dart';
-import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -23,7 +23,7 @@ class CategoryController {
 
     final Uri url = Uri.parse("http://localhost:8080/categories");
     final Map<String, String> headers = {
-      'Authorization': 'Bearer ${Session().token}',
+      'Authorization': 'Bearer ${SessionController().token}',
     };
 
     final response = await http.get(
@@ -38,8 +38,6 @@ class CategoryController {
         if (body["error"] == true) throw CategoryException(body["message"]);
 
         for (final Map<String, dynamic> categoryJson in body["data"]) {
-          //TODO: Agregar consulta para obtener productos directamente por Categoria
-
           Category category = Category.fromJson(
             json: categoryJson,
           );

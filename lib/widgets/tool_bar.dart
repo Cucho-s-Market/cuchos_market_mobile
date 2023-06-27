@@ -1,5 +1,4 @@
 import 'package:cuchos_market_mobile/pages/search_page.dart';
-import 'package:cuchos_market_mobile/widgets/branch_selector.dart';
 import 'package:cuchos_market_mobile/widgets/logo.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,7 @@ class _ToolBarState extends State<ToolBar> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchPage(),
+        builder: (context) => const SearchPage(),
       ),
     );
   }

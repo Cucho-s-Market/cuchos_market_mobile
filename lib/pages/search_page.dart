@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:cuchos_market_mobile/models/product.dart';
 import 'package:cuchos_market_mobile/pages/product_page.dart';
 import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({Key? key}) : super(key: key);
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();

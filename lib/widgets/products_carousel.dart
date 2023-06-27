@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:cuchos_market_mobile/widgets/product_widget.dart';
@@ -8,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ProductsCarousel extends StatefulWidget {
   final Widget title;
-  ProductsCarousel({Key? key, required this.title}) : super(key: key);
+  const ProductsCarousel({Key? key, required this.title}) : super(key: key);
 
   @override
   State<ProductsCarousel> createState() => _ProductsCarouselState();

@@ -1,7 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cuchos_market_mobile/models/product.dart';
 import 'package:cuchos_market_mobile/widgets/add_to_cart_button.dart';
-import 'package:cuchos_market_mobile/widgets/image_loader.dart';
+import 'package:cuchos_market_mobile/widgets/cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/product_description.dart';
 import 'package:cuchos_market_mobile/widgets/product_information.dart';
 import 'package:cuchos_market_mobile/widgets/products_carousel.dart';
@@ -22,6 +21,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ToolBar(),
+      floatingActionButton: const CartButton(),
       body: Column(
         children: [
           Expanded(
@@ -32,8 +32,8 @@ class _ProductPageState extends State<ProductPage> {
                 ProductDescription(
                   product: widget.product,
                 ),
-                ProductsCarousel(
-                  title: const Text(
+                const ProductsCarousel(
+                  title: Text(
                     "Sigue comprando",
                     style: TextStyle(fontSize: 20),
                   ),

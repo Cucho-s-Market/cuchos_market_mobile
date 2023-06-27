@@ -37,6 +37,6 @@ class CuchosMarketPage extends StatefulWidget {
 class _CuchosMarketPageState extends State<CuchosMarketPage> {
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return const LoginPage();
   }
 }

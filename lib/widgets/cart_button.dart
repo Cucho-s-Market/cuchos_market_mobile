@@ -10,7 +10,7 @@ class CartButton extends StatelessWidget {
       onPressed: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CartPage(),
+          builder: (context) => const CartPage(),
         ),
       ),
       tooltip: 'Cart',

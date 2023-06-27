@@ -1,4 +1,5 @@
-import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:cuchos_market_mobile/utilities/session_controller.dart';
+import 'package:cuchos_market_mobile/pages/user_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class DrawerSession extends StatefulWidget {
@@ -9,7 +10,7 @@ class DrawerSession extends StatefulWidget {
 }
 
 class _DrewerSessionState extends State<DrawerSession> {
-  final Session session = Session();
+  final SessionController session = SessionController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,12 @@ class _DrewerSessionState extends State<DrawerSession> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const UserProfilePage(),
+              ),
+            ),
             child: Row(
               children: [
                 Card(

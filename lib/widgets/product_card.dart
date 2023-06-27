@@ -6,15 +6,23 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
-  int quantity;
+  final int initialQuantity;
 
-  ProductCard({Key? key, required this.product, required this.quantity}) : super(key: key);
+  const ProductCard({Key? key, required this.product, required this.initialQuantity}) : super(key: key);
 
   @override
   State<ProductCard> createState() => _ProductCardState();
 }
 
 class _ProductCardState extends State<ProductCard> {
+  int quantity = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    quantity = widget.initialQuantity;
+  }
+
   void showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -38,37 +46,40 @@ class _ProductCardState extends State<ProductCard> {
   void _setQuantity(int newQuantity) {
     if (newQuantity == 0) showAlertDialog(context);
 
-    widget.quantity = newQuantity;
-    cartContent.value[widget.product] = widget.quantity;
+    quantity = newQuantity;
+    cartContent.value[widget.product] = quantity;
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
-        children: [
-          Expanded(child: ImageLoader(imageUrl: widget.product.images.first)),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.product.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  widget.product.brand,
-                  style: const TextStyle(color: Colors.white38),
-                ),
-                Text(
-                  'U\$D ${widget.product.price.toString()}',
-                  style: const TextStyle(color: Color.fromRGBO(245, 121, 59, 1), fontWeight: FontWeight.bold),
-                ),
-                QuantityCard(setQuantity: _setQuantity, currentQuantity: widget.quantity),
-              ],
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Expanded(child: ImageLoader(imageUrl: widget.product.images.first)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.product.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    widget.product.brand,
+                    style: const TextStyle(color: Colors.white38),
+                  ),
+                  Text(
+                    'U\$D ${widget.product.price.toString()}',
+                    style: const TextStyle(color: Color.fromRGBO(245, 121, 59, 1), fontWeight: FontWeight.bold),
+                  ),
+                  QuantityCard(setQuantity: _setQuantity, currentQuantity: quantity),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

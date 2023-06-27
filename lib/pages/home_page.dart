@@ -36,17 +36,17 @@ class _HomePageState extends State<HomePage> {
       drawer: const SidePanel(),
       floatingActionButton: const CartButton(),
       body: ListView(
-        children: [
+        children: const [
           PromosCarousel(),
-          const CategoryGrid(),
+          CategoryGrid(),
           ProductsCarousel(
-            title: const Text(
+            title: Text(
               "Mas vendido",
               style: TextStyle(fontSize: 20),
             ),
           ),
           ProductsCarousel(
-            title: const Text(
+            title: Text(
               "Nuevos Productos",
               style: TextStyle(fontSize: 20),
             ),

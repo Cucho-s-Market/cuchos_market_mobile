@@ -3,7 +3,7 @@ import 'package:cuchos_market_mobile/widgets/subcategory_tile.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesTiles extends StatefulWidget {
-  CategoriesTiles({Key? key}) : super(key: key);
+  const CategoriesTiles({Key? key}) : super(key: key);
 
   @override
   State<CategoriesTiles> createState() => _CategoriesTilesState();

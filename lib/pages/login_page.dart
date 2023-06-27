@@ -1,8 +1,7 @@
-import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
 import 'package:cuchos_market_mobile/widgets/logo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
     debugPrint(_emailController.text);
     debugPrint(_passwordController.text);
 
-    Session()
+    SessionController()
         .login(
       _emailController.text,
       _passwordController.text,

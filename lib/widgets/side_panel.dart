@@ -1,4 +1,4 @@
-import 'package:cuchos_market_mobile/models/session.dart';
+import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
 import 'package:cuchos_market_mobile/pages/login_page.dart';
@@ -16,7 +16,7 @@ class SidePanel extends StatefulWidget {
 }
 
 class _SidePanelState extends State<SidePanel> {
-  final Session session = Session();
+  final SessionController session = SessionController();
 
   void logout() {
     session.discardSesion();
@@ -67,7 +67,7 @@ class _SidePanelState extends State<SidePanel> {
                     ),
                   ),
                 ),
-                CategoriesTiles(),
+                const CategoriesTiles(),
               ],
             ),
           ),

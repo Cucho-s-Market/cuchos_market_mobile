@@ -22,7 +22,7 @@ class _CartPageState extends State<CartPage> {
               itemCount: cartContent.value.length,
               itemBuilder: (context, index) => ProductCard(
                 product: cartContent.value.keys.elementAt(index),
-                quantity: cartContent.value.values.elementAt(index),
+                initialQuantity: cartContent.value.values.elementAt(index),
               ),
             ),
           ),

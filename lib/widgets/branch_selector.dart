@@ -16,7 +16,6 @@ class _BranchSelectorState extends State<BranchSelector> {
     selectedItem = branchId;
     BranchController().selectedBranch.value = BranchController().branches.value[selectedItem]!;
 
-    //TODO: Consultar si el producto se obtiene cuando el stock es 0
     ProductController().loadProducts();
     Navigator.pop(context);
   }
