@@ -15,6 +15,7 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  ValueNotifier<Map<Product, int>> cartContent = Cart().products;
   int quantity = 0;
 
   @override
@@ -23,19 +24,25 @@ class _ProductCardState extends State<ProductCard> {
     quantity = widget.initialQuantity;
   }
 
+  void accept() {
+    Cart().updateCart(product: widget.product, quantity: 0);
+    Navigator.pop(context);
+  }
+
   void showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) => AlertDialog(
         title: const Text('Eliminar producto'),
         content: const Text('Desea eliminar el producto del carrito?'),
         actions: [
           TextButton(
-            onPressed: () => _setQuantity(1),
+            onPressed: () => Navigator.pop(context),
             child: const Text('Cancelar'),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: accept,
             child: const Text('Aceptar'),
           )
         ],
@@ -44,10 +51,13 @@ class _ProductCardState extends State<ProductCard> {
   }
 
   void _setQuantity(int newQuantity) {
-    if (newQuantity == 0) showAlertDialog(context);
-
-    quantity = newQuantity;
-    cartContent.value[widget.product] = quantity;
+    if (newQuantity == 0) {
+      showAlertDialog(context);
+    } else {
+      //TODO: Agregar logica para maxima cantidad permitida
+      quantity = newQuantity;
+      Cart().updateCart(product: widget.product, quantity: quantity);
+    }
   }
 
   @override

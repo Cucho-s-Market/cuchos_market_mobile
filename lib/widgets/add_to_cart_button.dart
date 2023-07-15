@@ -13,19 +13,20 @@ class AddToCartButton extends StatefulWidget {
 }
 
 class _AddToCartButtonsState extends State<AddToCartButton> {
+  Cart cart = Cart();
   bool isPressed = false;
   late int quantity;
 
   @override
   void initState() {
     super.initState();
-    quantity = cartContent.value[widget.product] ?? 1;
+    quantity = cart.cartContent[widget.product] ?? 1;
   }
 
   void _setQuantity(int newQuantity) => quantity = newQuantity;
 
   void _showQuantityButton(bool state) {
-    if (!state) cartContent.value[widget.product] = quantity;
+    if (!state) cart.updateCart(product: widget.product, quantity: quantity);
 
     setState(() => isPressed = state);
   }

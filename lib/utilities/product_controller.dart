@@ -22,8 +22,8 @@ class ProductController {
   ProductController._internal();
 
   Future<void> loadProducts({int? categoryId}) async {
-    final Map<String, Product> newProducts = {};
     final Map<String, String> parameters = {};
+    final Map<String, Product> newProducts = {};
 
     parameters['branch_id'] = branchController.selectedBranch.value.id.toString();
     if (categoryId != null) parameters['category_id'] = categoryId.toString();
@@ -55,7 +55,7 @@ class ProductController {
           Product product = Product.fromJson(json: productJson);
 
           newProducts[product.name] = product;
-          categoryController.addProductToCategory(categoryId: product.categoryId, product: product);
+          categoryController.addProductToCategory(categoryId: product.categoryId!, product: product);
         }
 
         break;

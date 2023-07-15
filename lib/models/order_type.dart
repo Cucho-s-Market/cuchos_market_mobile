@@ -1,4 +1,4 @@
 enum OrderType {
-  pickup,
+  pick_up,
   delivery,
 }

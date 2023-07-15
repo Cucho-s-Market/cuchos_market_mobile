@@ -12,7 +12,7 @@ class SessionController {
   static final SessionController _instance = SessionController._internal();
   String? token;
   User? user;
-  ValueNotifier<List<Address>> addresses = ValueNotifier<List<Address>>([]);
+  final ValueNotifier<List<Address>> addresses = ValueNotifier<List<Address>>([]);
 
   factory SessionController() {
     return _instance;
@@ -89,7 +89,7 @@ class SessionController {
         break;
 
       case 403:
-        throw CredentialsException("Forbidden: Error al iniciar sesion.");
+        throw AddressesException("Forbidden: Error al obtener direcciones.");
       default:
     }
   }

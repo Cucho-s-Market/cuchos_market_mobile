@@ -22,4 +22,9 @@ class Address {
       state: json["state"],
     );
   }
+
+  @override
+  String toString() {
+    return '$address $doorNumber, $location, $state';
+  }
 }

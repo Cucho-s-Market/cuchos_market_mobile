@@ -4,7 +4,7 @@ class Product {
   final DateTime entryDate;
   final double price;
   final String brand;
-  final int categoryId;
+  final int? categoryId;
   final List<dynamic> images;
 
   Product({
@@ -13,7 +13,7 @@ class Product {
     required this.entryDate,
     required this.price,
     required this.brand,
-    required this.categoryId,
+    this.categoryId,
     required this.images,
   });
 

@@ -1,3 +1,4 @@
+import 'package:cuchos_market_mobile/pages/order_history_page.dart';
 import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
 import 'package:cuchos_market_mobile/pages/home_page.dart';
@@ -52,6 +53,16 @@ class _SidePanelState extends State<SidePanel> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const HomePage(),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.work_history_rounded),
+                  title: const Text('Historial de Compras'),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderHistoryPage(),
                     ),
                   ),
                 ),

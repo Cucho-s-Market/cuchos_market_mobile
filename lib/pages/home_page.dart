@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: const CartButton(),
       body: ListView(
         children: const [
-          PromosCarousel(),
+          //PromosCarousel(),
           CategoryGrid(),
           ProductsCarousel(
             title: Text(
