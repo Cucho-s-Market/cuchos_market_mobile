@@ -19,7 +19,7 @@ class OrderController {
   OrderController._internal();
 
   Future<bool> placeOrder(Order order) async {
-    final Uri url = Uri.parse("http://localhost:8080/orders");
+    final Uri url = Uri.parse("https://cuchos-market-2023-34241c211eef.herokuapp.com/orders");
 
     final Map<String, String> headers = {
       'Authorization': 'Bearer ${SessionController().token}',
@@ -38,7 +38,7 @@ class OrderController {
 
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic> body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
 
         if (body["error"] == true) throw OrderException(body["message"]);
 
@@ -53,7 +53,12 @@ class OrderController {
   }
 
   Future<void> loadOrders() async {
-    final Uri url = Uri.parse("http://localhost:8080/orders/customer");
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
+      path: '/orders/customer',
+    );
+
     final List<Order> newOrders = [];
 
     final Map<String, String> headers = {
@@ -92,7 +97,7 @@ class OrderController {
   }
 
   Future<Order?> getOrderInformation(int orderId) async {
-    final Uri url = Uri.parse("http://localhost:8080/orders/${orderId.toString()}");
+    final Uri url = Uri.parse("https://cuchos-market-2023-34241c211eef.herokuapp.com/orders/${orderId.toString()}");
     final Order? order;
 
     final Map<String, String> headers = {

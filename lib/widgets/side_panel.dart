@@ -48,7 +48,7 @@ class _SidePanelState extends State<SidePanel> {
               children: [
                 ListTile(
                   leading: const Icon(Icons.home),
-                  title: const Text('Home'),
+                  title: const Text('Inicio'),
                   onTap: () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -62,13 +62,13 @@ class _SidePanelState extends State<SidePanel> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OrderHistoryPage(),
+                      builder: (context) => const OrderHistoryPage(),
                     ),
                   ),
                 ),
                 ListTile(
                   leading: const Icon(Icons.grid_view),
-                  title: const Text('Catalogo'),
+                  title: const Text('Catálogo'),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(

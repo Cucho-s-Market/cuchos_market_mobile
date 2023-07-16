@@ -11,6 +11,20 @@ class CategoryGrid extends StatefulWidget {
 }
 
 class _CategoryGridState extends State<CategoryGrid> {
+  int categoryQuantity = 4;
+
+  void showCategories() {
+    setState(
+      () {
+        if (categoryQuantity == 4) {
+          categoryQuantity = CategoryController().categories.value.length;
+        } else {
+          categoryQuantity = 4;
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Section(
@@ -18,13 +32,14 @@ class _CategoryGridState extends State<CategoryGrid> {
         "Tenemos lo que necesitas",
         style: TextStyle(fontSize: 20),
       ),
+      show: showCategories,
       child: ValueListenableBuilder(
         valueListenable: CategoryController().categories,
         builder: (context, categories, child) => GridView.builder(
           shrinkWrap: true,
           primary: false,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemCount: categories.values.length,
+          itemCount: categories.isNotEmpty ? categoryQuantity : categories.length,
           itemBuilder: (context, index) => CategoryCard(
             category: categories.values.elementAt(index),
           ),

@@ -21,7 +21,7 @@ class BranchController {
   Future<void> loadBranches() async {
     final Map<int, Branch> newBranches = {};
 
-    final Uri url = Uri.parse("http://localhost:8080/branches");
+    final Uri url = Uri.parse("https://cuchos-market-2023-34241c211eef.herokuapp.com/branches");
     final Map<String, String> headers = {
       'Authorization': 'Bearer ${SessionController().token}',
     };
@@ -33,7 +33,7 @@ class BranchController {
 
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic> body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
 
         if (body["error"] == true) throw BranchException(body["message"]);
 

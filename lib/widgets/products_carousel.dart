@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cuchos_market_mobile/pages/catalog_page.dart';
 import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:cuchos_market_mobile/widgets/product_widget.dart';
 import 'package:cuchos_market_mobile/widgets/section.dart';
@@ -20,6 +21,14 @@ class _ProductsCarouselState extends State<ProductsCarousel> {
   Widget build(BuildContext context) {
     return Section(
       title: widget.title,
+      show: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CatalogPage(
+            products: ProductController().products.value.values.toList(),
+          ),
+        ),
+      ),
       child: ValueListenableBuilder(
         valueListenable: ProductController().products,
         builder: (context, products, child) => Column(

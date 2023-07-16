@@ -4,7 +4,6 @@ import 'package:cuchos_market_mobile/utilities/product_controller.dart';
 import 'package:cuchos_market_mobile/widgets/cart_button.dart';
 import 'package:cuchos_market_mobile/widgets/category_grid.dart';
 import 'package:cuchos_market_mobile/widgets/products_carousel.dart';
-import 'package:cuchos_market_mobile/widgets/promos_carousel.dart';
 import 'package:cuchos_market_mobile/widgets/side_panel.dart';
 import 'package:cuchos_market_mobile/widgets/tool_bar.dart';
 import 'package:flutter/material.dart';

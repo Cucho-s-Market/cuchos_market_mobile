@@ -18,13 +18,17 @@ class ItemList extends StatelessWidget {
           margin: const EdgeInsets.all(5),
           child: Row(
             children: [
-              Expanded(child: ImageLoader(imageUrl: items.elementAt(index).product?.images.first)),
+              Container(
+                margin: const EdgeInsets.only(right: 15),
+                width: 130,
+                child: ImageLoader(imageUrl: items.elementAt(index).product?.images.first),
+              ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      items.elementAt(index).product!.name,
+                      ' ${items.elementAt(index).product!.name} (X${items.elementAt(index).quantity})',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -32,7 +36,7 @@ class ItemList extends StatelessWidget {
                       style: const TextStyle(color: Colors.white38),
                     ),
                     Text(
-                      'U\$D ${items.elementAt(index).product!.price.toString()}',
+                      'U\$D ${items.elementAt(index).product!.price.toString()} C/U',
                     ),
                   ],
                 ),

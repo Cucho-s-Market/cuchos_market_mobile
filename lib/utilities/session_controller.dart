@@ -24,7 +24,7 @@ class SessionController {
     if (email.isEmpty) throw CredentialsException('El email no puede estar vacio.');
     if (password.isEmpty) throw CredentialsException('La contraseña no puede estar vacia.');
 
-    final Uri url = Uri.parse("http://localhost:8080/users/auth/login");
+    final Uri url = Uri.parse("https://cuchos-market-2023-34241c211eef.herokuapp.com/users/auth/login");
 
     final response = await http.post(
       url,
@@ -62,7 +62,7 @@ class SessionController {
   }
 
   Future<void> loadAddresses() async {
-    final Uri url = Uri.parse("http://localhost:8080/users/customer/address");
+    final Uri url = Uri.parse("https://cuchos-market-2023-34241c211eef.herokuapp.com/users/customer/address");
 
     final Map<String, String> headers = {
       'Authorization': 'Bearer ${SessionController().token}',
@@ -75,7 +75,7 @@ class SessionController {
 
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic> body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
 
         if (body["error"] == true) throw AddressesException(body["message"]);
 

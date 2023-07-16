@@ -67,7 +67,12 @@ class _ProductCardState extends State<ProductCard> {
         margin: const EdgeInsets.all(10),
         child: Row(
           children: [
-            Expanded(child: ImageLoader(imageUrl: widget.product.images.first)),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(right: 20),
+                child: ImageLoader(imageUrl: widget.product.images.first),
+              ),
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

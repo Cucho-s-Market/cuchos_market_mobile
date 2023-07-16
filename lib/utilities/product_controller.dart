@@ -29,9 +29,8 @@ class ProductController {
     if (categoryId != null) parameters['category_id'] = categoryId.toString();
 
     final Uri url = Uri(
-      scheme: 'http',
-      host: 'localhost',
-      port: 8080,
+      scheme: 'https',
+      host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
       path: '/products',
       queryParameters: parameters,
     );
@@ -47,7 +46,7 @@ class ProductController {
 
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic> body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
 
         if (body["error"] == true) throw ProductException(body["message"]);
 
