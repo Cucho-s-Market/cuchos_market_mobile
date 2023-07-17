@@ -35,7 +35,7 @@ class Order {
       id: orderJson['id'],
       totalPrice: orderJson['totalPrice'],
       creationDate: DateTime.parse(orderJson['creationDate']),
-      endDate: DateTime.parse(orderJson['endDate']),
+      endDate: DateTime.tryParse(orderJson['endDate']),
       status: OrderStatus.values.byName(orderJson['status'].toString().toLowerCase()),
       addressId: orderJson['addressId'],
       clientAddress: orderJson['clientAddress'],

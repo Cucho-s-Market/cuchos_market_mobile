@@ -52,6 +52,20 @@ class OrderTitle extends StatelessWidget {
             ),
           ],
         ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Estado',
+              style: TextStyle(fontSize: 14, color: Colors.white38),
+            ),
+            Text(
+              order.status!.status,
+              style: const TextStyle(fontSize: 14),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
         Text(
           'Orden #${order.id!}',
           style: const TextStyle(fontSize: 14, color: Colors.white38),

@@ -52,6 +52,36 @@ class OrderController {
     return true;
   }
 
+  Future<void> cancelOrder(Order order) async {
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
+      path: '/orders/${order.id}',
+    );
+
+    final Map<String, String> headers = {
+      'Authorization': 'Bearer ${SessionController().token}',
+    };
+
+    final response = await http.put(
+      url,
+      headers: headers,
+    );
+
+    switch (response.statusCode) {
+      case 200:
+        Map<String, dynamic> body = jsonDecode(response.body);
+
+        if (body["error"] == true) throw OrderException(body["message"]);
+
+        break;
+
+      case 403:
+        throw OrderException("Forbidden: Error al obtener ordenes.");
+      default:
+    }
+  }
+
   Future<void> loadOrders() async {
     final Uri url = Uri(
       scheme: 'https',

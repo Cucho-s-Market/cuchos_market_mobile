@@ -94,6 +94,20 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text("Login"),
               ),
             ),
+            Container(
+              margin: const EdgeInsets.only(top: 30),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                ),
+                onPressed: () {},
+                child: const Text("Registrare"),
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Recuperar contraseña'),
+            ),
           ],
         ),
       ),

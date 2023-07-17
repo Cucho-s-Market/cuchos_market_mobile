@@ -36,7 +36,7 @@ class _ProductsCarouselState extends State<ProductsCarousel> {
             CarouselSlider(
               carouselController: _controller,
               items: List.generate(
-                products.length,
+                products.isNotEmpty ? 10 : products.length,
                 (index) => Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -58,7 +58,7 @@ class _ProductsCarouselState extends State<ProductsCarousel> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                products.length,
+                products.isNotEmpty ? 10 : products.length,
                 (index) => GestureDetector(
                   onTap: () => _controller.animateToPage(index),
                   child: Container(

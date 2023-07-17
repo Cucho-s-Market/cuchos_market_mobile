@@ -3,6 +3,7 @@ class Product {
   final String description;
   final DateTime entryDate;
   final double price;
+  final double? finalPrice;
   final String brand;
   final int? categoryId;
   final List<dynamic> images;
@@ -12,6 +13,7 @@ class Product {
     required this.description,
     required this.entryDate,
     required this.price,
+    required this.finalPrice,
     required this.brand,
     this.categoryId,
     required this.images,
@@ -23,6 +25,7 @@ class Product {
       description: json["description"],
       entryDate: DateTime.parse(json["entryDate"]),
       price: json["price"],
+      finalPrice: json["finalPrice"],
       brand: json["brand"],
       categoryId: json["categoryId"],
       images: json.containsKey("images") ? json["images"] : [],

@@ -22,6 +22,7 @@ class ProductController {
   ProductController._internal();
 
   Future<void> loadProducts({int? categoryId}) async {
+    //TODO: Obtener stock producto
     final Map<String, String> parameters = {};
     final Map<String, Product> newProducts = {};
 

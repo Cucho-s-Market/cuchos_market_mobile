@@ -30,28 +30,33 @@ class ProductPrice extends StatelessWidget {
                   ],
                 ),
               ),
-              const VerticalDivider(),
-              Container(
-                margin: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              if (product.price != product.finalPrice)
+                Row(
                   children: [
-                    const Text(
-                      'Precio anterior',
-                      style: TextStyle(color: Colors.white54, fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'U\$D ${product.price.toString()}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                        decoration: TextDecoration.lineThrough,
+                    const VerticalDivider(),
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Precio anterior',
+                            style: TextStyle(color: Colors.white54, fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'U\$D ${product.finalPrice.toString()}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
             ],
           ),
         ),

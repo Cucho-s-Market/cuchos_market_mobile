@@ -1,5 +1,7 @@
 import 'package:cuchos_market_mobile/models/address.dart';
+import 'package:cuchos_market_mobile/models/customer.dart';
 import 'package:cuchos_market_mobile/utilities/session_controller.dart';
+import 'package:cuchos_market_mobile/widgets/add_address.dart';
 import 'package:cuchos_market_mobile/widgets/address_card.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +18,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
   final TextEditingController _passwordController = TextEditingController(text: SessionController().user?.password);
   final TextEditingController _firstnameController = TextEditingController(text: SessionController().user?.firstName);
   final TextEditingController _lastnameController = TextEditingController(text: SessionController().user?.lastName);
+  final TextEditingController _birthdateController = TextEditingController(text: SessionController().user?.birthdate.toString());
+  final TextEditingController _telephoneController = TextEditingController(text: SessionController().user?.telephone.toString());
+  final TextEditingController _dniController = TextEditingController(text: SessionController().user?.dni.toString());
   String? errorMessage;
 
   @override
@@ -26,6 +31,62 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   void loadInfo() async {
     await SessionController().loadAddresses();
+  }
+
+  void saveInformation() {
+    SessionController()
+        .updateUserInformation(
+          Customer(
+            email: _emailController.text,
+            password: _passwordController.text,
+            firstName: _firstnameController.text,
+            lastName: _lastnameController.text,
+            telephone: int.parse(_telephoneController.text),
+            birthdate: DateTime.tryParse(_birthdateController.text),
+            dni: int.parse(_dniController.text),
+          ),
+        )
+        .then(
+          (value) => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Información actualizada'),
+              content: const Text('Información actualizada corrrectamente.'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Aceptar'),
+                )
+              ],
+            ),
+          ),
+        )
+        .onError(
+          (error, stackTrace) => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Error al actualizar información'),
+              content: Text(error.toString()),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Aceptar'),
+                )
+              ],
+            ),
+          ),
+        );
+  }
+
+  void showAddAddressModal() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: const AddAddress(),
+      ),
+    );
   }
 
   @override
@@ -51,7 +112,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
             ),
             TextFormField(
+              controller: _dniController,
+              enabled: false,
+              decoration: InputDecoration(
+                label: const Text("Cédula"),
+                errorText: errorMessage == null ? errorMessage : '',
+              ),
+            ),
+            TextFormField(
               controller: _emailController,
+              enabled: false,
               decoration: InputDecoration(
                 label: const Text("Email"),
                 errorText: errorMessage == null ? errorMessage : '',
@@ -82,6 +152,34 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 errorText: errorMessage == null ? errorMessage : '',
               ),
             ),
+            TextFormField(
+              controller: _telephoneController,
+              decoration: InputDecoration(
+                label: const Text("Teléfono"),
+                errorText: errorMessage == null ? errorMessage : '',
+              ),
+            ),
+            TextFormField(
+              controller: _birthdateController,
+              enabled: false,
+              decoration: InputDecoration(
+                label: const Text("Fecha de nacimiento"),
+                errorText: errorMessage == null ? errorMessage : '',
+              ),
+            ),
+            Flexible(
+              child: Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 15),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  onPressed: saveInformation,
+                  child: const Text("Guardar"),
+                ),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(top: 20, bottom: 10),
               child: Row(
@@ -95,7 +193,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: showAddAddressModal,
                     icon: const Icon(Icons.add),
                   ),
                 ],
@@ -110,16 +208,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     address: addresses.value.elementAt(index),
                   ),
                 ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                onPressed: () {},
-                child: const Text("Guardar"),
               ),
             ),
           ],

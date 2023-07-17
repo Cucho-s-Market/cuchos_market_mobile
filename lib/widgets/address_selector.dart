@@ -18,7 +18,7 @@ class _AddressSelectorState extends State<AddressSelector> {
   @override
   void initState() {
     super.initState();
-    selectedItem = widget.addresses.first.id;
+    selectedItem = widget.addresses.first.id!;
   }
 
   void selectAddress(int addressId) {
