@@ -35,7 +35,7 @@ class Customer {
       'password': password,
       'firstName': firstName,
       'lastName': lastName,
-      'birthdate': birthdate.toString().split(' ').first,
+      'birthdate': birthdate != null ? birthdate.toString().split(' ').first : '',
       'telephone': telephone,
       'dni': dni,
     };

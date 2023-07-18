@@ -63,12 +63,13 @@ class _CartPageState extends State<CartPage> {
                       title: const Text('Pick-Up'),
                       onChanged: (value) => setState(() => _orderType = value!),
                     ),
-                    RadioListTile(
-                      value: OrderType.delivery,
-                      groupValue: _orderType,
-                      title: const Text('Delivery'),
-                      onChanged: (value) => setState(() => _orderType = value!),
-                    ),
+                    if (SessionController().addresses.value.isNotEmpty)
+                      RadioListTile(
+                        value: OrderType.delivery,
+                        groupValue: _orderType,
+                        title: const Text('Delivery'),
+                        onChanged: (value) => setState(() => _orderType = value!),
+                      ),
                   ],
                 ),
                 if (_orderType == OrderType.delivery)

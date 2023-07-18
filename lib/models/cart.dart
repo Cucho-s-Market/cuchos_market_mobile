@@ -16,8 +16,10 @@ class Cart {
 
   void updateCart({required Product product, required int quantity}) {
     if (quantity > 0) {
+      if (products.value.containsKey(product)) totalAmount.value -= (product.price * products.value[product]!);
+
       products.value[product] = quantity;
-      totalAmount.value = (product.price * quantity);
+      totalAmount.value += (product.price * quantity);
     } else if (products.value.containsKey(product)) {
       Map<Product, int> newProducts = {};
 

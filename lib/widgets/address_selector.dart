@@ -13,12 +13,12 @@ class AddressSelector extends StatefulWidget {
 }
 
 class _AddressSelectorState extends State<AddressSelector> {
-  late int selectedItem;
+  int? selectedItem;
 
   @override
   void initState() {
     super.initState();
-    selectedItem = widget.addresses.first.id!;
+    selectedItem = widget.addresses.first.id;
   }
 
   void selectAddress(int addressId) {
