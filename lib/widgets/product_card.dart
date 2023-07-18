@@ -54,7 +54,6 @@ class _ProductCardState extends State<ProductCard> {
     if (newQuantity == 0) {
       showAlertDialog(context);
     } else {
-      //TODO: Agregar logica para maxima cantidad permitida
       quantity = newQuantity;
       Cart().updateCart(product: widget.product, quantity: quantity);
     }
@@ -86,10 +85,13 @@ class _ProductCardState extends State<ProductCard> {
                     style: const TextStyle(color: Colors.white38),
                   ),
                   Text(
-                    'U\$D ${widget.product.price.toString()}',
+                    'UYU ${widget.product.price.toString()}',
                     style: const TextStyle(color: Color.fromRGBO(245, 121, 59, 1), fontWeight: FontWeight.bold),
                   ),
-                  QuantityCard(setQuantity: _setQuantity, currentQuantity: quantity),
+                  QuantityCard(
+                    setQuantity: _setQuantity,
+                    currentQuantity: quantity,
+                  ),
                 ],
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:cuchos_market_mobile/utilities/session_controller.dart';
 import 'package:cuchos_market_mobile/widgets/add_address.dart';
 import 'package:cuchos_market_mobile/widgets/address_card.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -18,7 +19,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   final TextEditingController _passwordController = TextEditingController(text: SessionController().user?.password);
   final TextEditingController _firstnameController = TextEditingController(text: SessionController().user?.firstName);
   final TextEditingController _lastnameController = TextEditingController(text: SessionController().user?.lastName);
-  final TextEditingController _birthdateController = TextEditingController(text: SessionController().user?.birthdate.toString());
+  final TextEditingController _birthdateController =
+      TextEditingController(text: SessionController().user?.birthdate != null ? DateFormat('dd/MM/yyyy').format(SessionController().user!.birthdate!) : null);
   final TextEditingController _telephoneController = TextEditingController(text: SessionController().user?.telephone.toString());
   final TextEditingController _dniController = TextEditingController(text: SessionController().user?.dni.toString());
   String? errorMessage;
@@ -99,7 +101,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
         margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               margin: const EdgeInsets.only(bottom: 10),

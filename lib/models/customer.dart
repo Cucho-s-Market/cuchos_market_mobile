@@ -35,9 +35,9 @@ class Customer {
       'password': password,
       'firstName': firstName,
       'lastName': lastName,
-      'birthdate': birthdate,
+      'birthdate': birthdate.toString().split(' ').first,
       'telephone': telephone,
-      'dni': telephone,
+      'dni': dni,
     };
   }
 }

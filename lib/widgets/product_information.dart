@@ -56,8 +56,11 @@ class _ProductInformationState extends State<ProductInformation> {
                 height: 5.0,
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: (Theme.of(context).brightness == Brightness.dark ? Colors.grey[200] : Colors.black)?.withOpacity(_current == index ? 0.9 : 0.4)),
+                  shape: BoxShape.circle,
+                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.grey[200] : Colors.black)?.withOpacity(
+                    _current == index ? 0.9 : 0.4,
+                  ),
+                ),
               ),
             ),
           ),

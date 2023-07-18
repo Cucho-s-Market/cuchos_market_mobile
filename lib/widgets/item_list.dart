@@ -36,7 +36,7 @@ class ItemList extends StatelessWidget {
                       style: const TextStyle(color: Colors.white38),
                     ),
                     Text(
-                      'U\$D ${items.elementAt(index).product!.price.toString()} C/U',
+                      'UYU ${items.elementAt(index).product!.price.toString()} C/U',
                     ),
                   ],
                 ),

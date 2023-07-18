@@ -4,6 +4,7 @@ import 'package:cuchos_market_mobile/utilities/order_controller.dart';
 import 'package:cuchos_market_mobile/widgets/empty_orders.dart';
 import 'package:cuchos_market_mobile/widgets/item_list.dart';
 import 'package:cuchos_market_mobile/widgets/order_title.dart';
+import 'package:cuchos_market_mobile/widgets/place_issue.dart';
 import 'package:cuchos_market_mobile/widgets/tool_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -95,6 +96,17 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
     );
   }
 
+  void placeIssue(Order order) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: PlaceIssue(order: order),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,12 +134,24 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                         ),
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      onPressed: orders.elementAt(index).status == OrderStatus.pending ? () => cancelOrderDialog(orders.elementAt(index)) : null,
-                      child: const Text('Cancelar orden'),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          onPressed: () => placeIssue(orders.elementAt(index)),
+                          child: const Text('Realizar reclamo'),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          onPressed: orders.elementAt(index).status == OrderStatus.pending ? () => cancelOrderDialog(orders.elementAt(index)) : null,
+                          child: const Text('Cancelar orden'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

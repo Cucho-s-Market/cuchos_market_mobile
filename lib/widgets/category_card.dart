@@ -1,7 +1,7 @@
 import 'package:cuchos_market_mobile/models/category.dart';
 import 'package:cuchos_market_mobile/pages/catalog_page.dart';
+import 'package:cuchos_market_mobile/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class CategoryCard extends StatelessWidget {
   final Category category;
@@ -23,19 +23,7 @@ class CategoryCard extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.bottomStart,
           children: [
-            Opacity(
-              opacity: 0.7,
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: category.image ?? '',
-                imageErrorBuilder: (context, error, stackTrace) => const Center(
-                  child: Text(
-                    'NO DATA',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-              ),
-            ),
+            ImageLoader(imageUrl: category.image),
             Container(
               margin: const EdgeInsets.all(10),
               child: Text(

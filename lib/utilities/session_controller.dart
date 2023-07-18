@@ -24,7 +24,11 @@ class SessionController {
     if (email.isEmpty) throw CredentialsException('El email no puede estar vacio.');
     if (password.isEmpty) throw CredentialsException('La contraseña no puede estar vacia.');
 
-    final Uri url = Uri.parse("https://cuchos-market-2023-34241c211eef.herokuapp.com/users/auth/login");
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
+      path: '/users/auth/login',
+    );
 
     final response = await http.post(
       url,
@@ -41,7 +45,7 @@ class SessionController {
 
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic> body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
 
         if (body["error"] == true) throw CredentialsException(body["message"]);
 
@@ -57,6 +61,96 @@ class SessionController {
 
       case 403:
         throw CredentialsException("Forbidden: Error al iniciar sesion.");
+      default:
+    }
+  }
+
+  Future<void> resetPassword(String email) async {
+    if (email.isEmpty) throw CredentialsException('El email no puede estar vacio.');
+
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
+      path: '/users/auth/resetPassword',
+    );
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'email': email,
+        },
+      ),
+    );
+
+    switch (response.statusCode) {
+      case 200:
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
+
+        if (body["error"] == true) throw CredentialsException(body["message"]);
+
+        break;
+
+      case 403:
+        throw CredentialsException("Forbidden: Error al iniciar sesion.");
+      default:
+    }
+  }
+
+  Future<void> register({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String telephone,
+    required String dni,
+    required DateTime birthdate,
+  }) async {
+    if (email.isEmpty) throw CredentialsException('El email no puede estar vacío.');
+    if (password.isEmpty) throw CredentialsException('La contraseña no puede estar vacía.');
+    if (firstName.isEmpty) throw CredentialsException('El nombre no puede estar vacío.');
+    if (lastName.isEmpty) throw CredentialsException('El apellido no puede estar vacío.');
+    if (telephone.isEmpty) throw CredentialsException('El número no puede estar vacío.');
+    if (dni.isEmpty) throw CredentialsException('La Cédula no puede estar vacía.');
+    if (birthdate.year >= DateTime.now().year) throw CredentialsException('Ingrese una fecha de nacimiento válida.');
+
+    Customer customer = Customer(
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      telephone: int.tryParse(telephone) ?? 0,
+      dni: int.tryParse(dni) ?? 0,
+      birthdate: birthdate,
+    );
+
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
+      path: '/users/customer',
+    );
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(customer.toJson()),
+    );
+
+    switch (response.statusCode) {
+      case 200:
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
+
+        if (body["error"] == true) throw CredentialsException(body["message"]);
+
+        break;
+
+      case 403:
+        throw CredentialsException("Forbidden: Error al registrar usuario.");
       default:
     }
   }
@@ -84,7 +178,7 @@ class SessionController {
 
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic> body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
 
         if (body["error"] == true) throw CredentialsException(body["message"]);
 

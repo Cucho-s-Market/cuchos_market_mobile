@@ -24,7 +24,7 @@ class ProductPrice extends StatelessWidget {
                       style: TextStyle(color: Colors.white54, fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'U\$D ${product.price.toString()}',
+                      'UYU ${product.price.toString()}',
                       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -44,7 +44,7 @@ class ProductPrice extends StatelessWidget {
                             style: TextStyle(color: Colors.white54, fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'U\$D ${product.finalPrice.toString()}',
+                            'UYU ${product.finalPrice.toString()}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

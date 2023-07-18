@@ -63,6 +63,7 @@ class CategoryController {
   void addProductToCategory({required int categoryId, required Product product}) {
     Category category = categories.value.values.firstWhere((category) => category.subcategories.containsKey(categoryId));
 
+    category.products[product.name] = product;
     category.subcategories[categoryId]?.products[product.name] = product;
   }
 }
