@@ -127,7 +127,7 @@ class _EditAddressState extends State<EditAddress> {
                 ),
                 onPressed: updateAddress,
                 child: const Text(
-                  "Crear dirección",
+                  "Actualizar dirección",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
