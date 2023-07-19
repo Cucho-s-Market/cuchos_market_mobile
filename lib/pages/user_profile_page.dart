@@ -31,11 +31,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
     loadInfo();
   }
 
+  void showLoadingAnimation() {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+  }
+
   void loadInfo() async {
     await SessionController().loadAddresses();
   }
 
   void saveInformation() {
+    showLoadingAnimation();
+
     SessionController()
         .updateUserInformation(
           Customer(
@@ -56,7 +65,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
               content: const Text('Información actualizada corrrectamente.'),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Aceptar'),
                 )
               ],
@@ -71,7 +83,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
               content: Text(error.toString()),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Aceptar'),
                 )
               ],

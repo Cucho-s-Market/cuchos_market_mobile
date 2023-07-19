@@ -1,7 +1,7 @@
 class Address {
   final int? id;
   final String address;
-  final int doorNumber;
+  final int? doorNumber;
   final String location;
   final String state;
 

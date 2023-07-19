@@ -26,14 +26,21 @@ class _CartPageState extends State<CartPage> {
   OrderType _orderType = OrderType.pick_up;
   Address? selectedAddress;
 
-  void setAddress(int addressId) {
-    selectedAddress = SessionController().addresses.value.firstWhere((address) => address.id == addressId);
-  }
-
   @override
   void initState() {
     super.initState();
     loadData();
+  }
+
+  void setAddress(int addressId) {
+    selectedAddress = SessionController().addresses.value.firstWhere((address) => address.id == addressId);
+  }
+
+  void showLoadingAnimation() {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
   }
 
   void loadData() async {
@@ -136,6 +143,8 @@ class _CartPageState extends State<CartPage> {
   }
 
   void _buyProducts() async {
+    showLoadingAnimation();
+
     List<Item> items = [];
 
     for (Product product in cartContent.value.keys) {

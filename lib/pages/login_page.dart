@@ -18,6 +18,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   String? errorMessage;
 
+  void showLoadingAnimation() {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+  }
+
   void recoverPasswordModal() {
     showModalBottomSheet(
       context: context,
@@ -30,8 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() {
-    debugPrint(_emailController.text);
-    debugPrint(_passwordController.text);
+    showLoadingAnimation();
 
     SessionController()
         .login(
@@ -47,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       onError: (error) {
         setState(() {
+          Navigator.pop(context);
           errorMessage = error.toString();
         });
         debugPrint(error.toString());

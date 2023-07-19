@@ -22,7 +22,6 @@ class _CategoriesTilesState extends State<CategoriesTiles> {
           (x) => categories.values.elementAt(x).subcategories.isEmpty
               ? ListTile(
                   title: Text(categories.values.elementAt(x).name),
-                  onTap: () {},
                 )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

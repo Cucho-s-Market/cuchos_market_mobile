@@ -23,9 +23,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
   String? errorMessage;
 
+  void showLoadingAnimation() {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+  }
+
   void register() {
-    debugPrint(_emailController.text);
-    debugPrint(_passwordController.text);
+    showLoadingAnimation();
 
     SessionController()
         .register(
@@ -45,7 +51,10 @@ class _RegisterPageState extends State<RegisterPage> {
           content: const Text('Usuario creado corrrectamente.'),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
               child: const Text('Aceptar'),
             ),
           ],
@@ -53,6 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       onError: (error) {
         setState(() {
+          Navigator.pop(context);
           errorMessage = error.toString();
         });
         debugPrint(error.toString());

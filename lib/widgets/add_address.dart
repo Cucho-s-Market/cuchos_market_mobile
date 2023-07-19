@@ -17,12 +17,21 @@ class _AddAddressState extends State<AddAddress> {
   final TextEditingController _stateController = TextEditingController();
   String? errorMessage;
 
+  void showLoadingAnimation() {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+  }
+
   void addAddress() {
+    showLoadingAnimation();
+
     SessionController()
         .addAddress(
           Address(
             address: _addressController.text,
-            doorNumber: int.parse(_doorNumberController.text),
+            doorNumber: int.tryParse(_doorNumberController.text),
             location: _locationController.text,
             state: _stateController.text,
           ),
@@ -35,7 +44,10 @@ class _AddAddressState extends State<AddAddress> {
               content: const Text('Dirección creada correctamente.'),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Aceptar'),
                 )
               ],
@@ -50,7 +62,10 @@ class _AddAddressState extends State<AddAddress> {
               content: Text(error.toString()),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Aceptar'),
                 )
               ],

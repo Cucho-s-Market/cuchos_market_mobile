@@ -231,6 +231,11 @@ class SessionController {
   }
 
   Future<void> addAddress(Address address) async {
+    if (address.address.isEmpty) throw AddressesException('El campo Dirección no puede estar vacío.');
+    if (address.doorNumber == null) throw AddressesException('El campo número de puerta no puede estar vacío.');
+    if (address.location.isEmpty) throw AddressesException('El campo Ciudad no puede estar vacío.');
+    if (address.state.isEmpty) throw AddressesException('El campo Estado no puede estar vacío.');
+
     final Uri url = Uri(
       scheme: 'https',
       host: 'cuchos-market-2023-34241c211eef.herokuapp.com',
@@ -264,6 +269,11 @@ class SessionController {
   }
 
   Future<void> updateAddress(Address address) async {
+    if (address.address.isEmpty) throw AddressesException('El campo Dirección no puede estar vacío.');
+    if (address.doorNumber == null) throw AddressesException('El campo número de puerta no puede estar vacío.');
+    if (address.location.isEmpty) throw AddressesException('El campo Ciudad no puede estar vacío.');
+    if (address.state.isEmpty) throw AddressesException('El campo Estado no puede estar vacío.');
+
     final Uri url = Uri(
       scheme: 'https',
       host: 'cuchos-market-2023-34241c211eef.herokuapp.com',

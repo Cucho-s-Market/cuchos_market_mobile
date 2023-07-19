@@ -28,7 +28,16 @@ class _EditAddressState extends State<EditAddress> {
     super.initState();
   }
 
+  void showLoadingAnimation() {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+  }
+
   void updateAddress() {
+    showLoadingAnimation();
+
     SessionController()
         .updateAddress(
           Address(
@@ -47,7 +56,10 @@ class _EditAddressState extends State<EditAddress> {
               content: const Text('Dirección actualizada corrrectamente.'),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Aceptar'),
                 )
               ],
@@ -62,7 +74,10 @@ class _EditAddressState extends State<EditAddress> {
               content: Text(error.toString()),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Aceptar'),
                 )
               ],
@@ -81,7 +96,7 @@ class _EditAddressState extends State<EditAddress> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Agregar dirección',
+              'Editar dirección',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Column(
