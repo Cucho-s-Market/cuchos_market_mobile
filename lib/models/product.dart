@@ -1,21 +1,34 @@
-import 'dart:ffi';
-
-import 'package:flutter/material.dart';
-
 class Product {
   final String name;
   final String description;
   final DateTime entryDate;
-  final Float price;
+  final double price;
+  final double? finalPrice;
   final String brand;
-  final List<Image> images;
+  final int? categoryId;
+  final List<dynamic> images;
 
   Product({
     required this.name,
     required this.description,
     required this.entryDate,
     required this.price,
+    required this.finalPrice,
     required this.brand,
+    this.categoryId,
     required this.images,
   });
+
+  factory Product.fromJson({required Map<String, dynamic> json}) {
+    return Product(
+      name: json["name"],
+      description: json["description"],
+      entryDate: DateTime.parse(json["entryDate"]),
+      price: json["price"],
+      finalPrice: json["finalPrice"],
+      brand: json["brand"],
+      categoryId: json["categoryId"],
+      images: json.containsKey("images") ? json["images"] : [],
+    );
+  }
 }

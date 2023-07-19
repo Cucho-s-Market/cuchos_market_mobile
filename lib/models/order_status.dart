@@ -1,6 +1,9 @@
 enum OrderStatus {
-  cancelled,
-  pending,
-  preparing,
-  delivered,
+  cancelled('Cancelado'),
+  pending('Pendiente'),
+  preparing('En preparación'),
+  delivered('Enviado');
+
+  final String status;
+  const OrderStatus(this.status);
 }

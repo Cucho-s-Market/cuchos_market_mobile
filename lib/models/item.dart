@@ -1,21 +1,34 @@
-import 'dart:ffi';
-
 import 'package:cuchos_market_mobile/models/product.dart';
 
 class Item {
-  final String id;
   final String name;
-  final Float price;
-  final Float finalPrice;
-  final Int quantity;
-  final Product product;
+  final double price;
+  final double? finalPrice;
+  final int quantity;
+  final Product? product;
 
   Item({
-    required this.id,
     required this.name,
     required this.price,
-    required this.finalPrice,
+    this.finalPrice,
     required this.quantity,
     required this.product,
   });
+
+  factory Item.fromJson({required Map<String, dynamic> json}) {
+    return Item(
+      name: json['name'],
+      price: json['unitPrice'],
+      quantity: json['quantity'],
+      product: json['product'] != null ? Product.fromJson(json: json['product']) : json['product'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'price': price,
+      'quantity': quantity,
+    };
+  }
 }
