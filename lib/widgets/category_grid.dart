@@ -28,9 +28,6 @@ class _CategoryGridState extends State<CategoryGrid> {
 
   @override
   Widget build(BuildContext context) {
-    final double itemHeight = (MediaQuery.of(context).size.height - kToolbarHeight - 24) / 2;
-    final double itemWidth = MediaQuery.of(context).size.width / 2;
-
     return Section(
       title: const Text(
         "Tenemos lo que necesitas",
@@ -49,19 +46,6 @@ class _CategoryGridState extends State<CategoryGrid> {
             category: categories.values.elementAt(index),
           ),
         ),
-
-        // GridView.builder(
-        //   shrinkWrap: true,
-        //   primary: false,
-        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //     crossAxisCount: 2,
-        //     childAspectRatio: (itemWidth / itemHeight),
-        //   ),
-        //   itemCount: categories.isNotEmpty ? categoryQuantity : categories.length,
-        //   itemBuilder: (context, index) => CategoryCard(
-        //     category: categories.values.elementAt(index),
-        //   ),
-        // ),
       ),
     );
   }
